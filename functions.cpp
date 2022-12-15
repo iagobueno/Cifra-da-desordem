@@ -65,3 +65,21 @@ string to_Lower(string str){
 
     return str;
 }
+
+string create_List(string key){
+
+    cout << "sdjfoiasdjf"; PL;
+
+    string str = "abcdefghijklmnopqrstuvwxyz0123456789";
+    cout << key; PL;
+
+    int i;
+    for(i = 0 ; i < key.size(); i++){
+
+        str.erase(remove(str.begin(), str.end(), key[i]), str.end()); //remove key from string
+
+    }
+
+    cout << str; PL;
+    return str;
+}

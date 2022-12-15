@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 #include <string.h>
+#include <iostream> 
+#include <fstream>
 #include "functions.h"
+
 using namespace std;
 
 int main(int argc, char **argv)
@@ -15,13 +18,24 @@ int main(int argc, char **argv)
     // pega a chave e remove os caracteres repetidos
     string b(argv[1]);
     string key = removeRepeatedChars(b);
+    int iterador = key.size();
+
+    // cria a lista
+    string create_List(key);
 
     // abre o arquivo, pega o texto e o trata
-    string plain = "MACONHA";
-    plain = to_Lower(plain);
+    std::ifstream myfile ("./texto.txt");
+    string text;
 
-    cout << key; PL;
-    cout << plain; PL;
+    if ( myfile.is_open() ) {
+        string buffer;
+        while ( myfile ){
+            myfile >> buffer;
+            text.append(buffer); 
+        }
+    }
+    
+    // cout << text; PL;
 
     return 0;
 }
