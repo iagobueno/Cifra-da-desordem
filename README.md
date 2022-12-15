@@ -1,8 +1,8 @@
-# Cifra de Desordem de Trafalgar
+# Cifra da Desordem
 
 ## Introdução
 
-A ideia da cifra da desordem é embaralhar o alfabeto baseado em uma chave e então usar técnicas de substituição já conhecidas.
+A ideia da Cifra da Desordem é embaralhar o alfabeto baseado em uma chave e então usar técnicas de substituição já conhecidas.
 
 ## Algoritmo
 
@@ -26,17 +26,16 @@ Foram utilizadas na implementação:
 |       g        |     k      |
 |       f        |     3      |
 
-### Funcionamento
+### Chave
 
 Dado nossa lista circular:
 
 `abcdefghijklmnopqrstuvwxyz0123456789`
 
 Iremos utilizar uma chave para manipular essa lista e criar uma tabela Hash de substituição.
+A Chave é uma string qualquer composta de letras e números: `albini`, `iago99`, `k3y`.
 
-A Chave é uma palavra qualquer do dicionário. Por exemplo:
-
-`amar`
+Neste exemplo, usarei a string `amar`.
 
 Guardamos o tamanho da chave(quantidade de carácteres) % 36, pois ele será nosso iterador
 
@@ -68,15 +67,15 @@ Neste caso, a cada 4 interações removemos uma letra da lista. Até acabar noss
 
 ### Exemplo de interação
 
-##### primeira interação
+#### primeira interação
 
-**b**cdefghijklnopqstuvwxyz0123456789 | cont = 1
+**B**cdefghijklnopqstuvwxyz0123456789 | cont = 1
 
-b**c**defghijklnopqstuvwxyz0123456789 | cont = 2
+b**C**defghijklnopqstuvwxyz0123456789 | cont = 2
 
-bc**d**efghijklnopqstuvwxyz0123456789 | cont = 3
+bc**D**efghijklnopqstuvwxyz0123456789 | cont = 3
 
-bcd**e**fghijklnopqstuvwxyz0123456789 | **cont = 4**
+bcd**E**fghijklnopqstuvwxyz0123456789 | **cont = 4**
 
 Neste momento, a letra 'e' sai da lista circular e vai para o fim do buffer
 
@@ -84,15 +83,15 @@ Neste momento, a letra 'e' sai da lista circular e vai para o fim do buffer
 |----------------------------------|--------|
 | bcdfghijklnopqstuvwxyz0123456789 |  amre  |
 
-##### segunda interação
+#### segunda interação
 
-bcd**f**ghijklnopqstuvwxyz0123456789 | cont = 1
+bcd**F**ghijklnopqstuvwxyz0123456789 | cont = 1
 
-bcdf**g**hijklnopqstuvwxyz0123456789 | cont = 2
+bcdf**G**hijklnopqstuvwxyz0123456789 | cont = 2
 
-bcdfg**h**ijklnopqstuvwxyz0123456789 | cont = 3
+bcdfg**H**ijklnopqstuvwxyz0123456789 | cont = 3
 
-bcdfgh**i**jklnopqstuvwxyz0123456789 | cont = 4
+bcdfgh**I**jklnopqstuvwxyz0123456789 | cont = 4
 
 Neste momento, a letra 'i' sai da lista circular e vai para o fim do buffer
 

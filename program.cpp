@@ -12,26 +12,16 @@ int main(int argc, char **argv)
     if(check_Arguments(argc, argv))
         return 1;
 
-    // pega a chave da stdin
-    string key(argv[1]);
+    // pega a chave e remove os caracteres repetidos
+    string b(argv[1]);
+    string key = removeRepeatedChars(b);
 
-    map<char, int> repeated;
-    string str;
-   
-    str.
+    // abre o arquivo, pega o texto e o trata
+    string plain = "MACONHA";
+    plain = to_Lower(plain);
 
-    int i;
-    for(i = 0 ; i < key.size(); i++){
-        // se a letra não apareceu
-        if(!repeated[key[i]]){
-            str.append(key[i]);
-        }
-        repeated[key[i]]++;
-
-        // cout<< repeated[key[i]]; PL;
-    }
-
-    cout << str; PL;
+    cout << key; PL;
+    cout << plain; PL;
 
     return 0;
 }
