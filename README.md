@@ -35,31 +35,29 @@ Dado nossa lista circular:
 Iremos utilizar uma chave para manipular essa lista e criar uma tabela Hash de substituição.
 A Chave é uma string qualquer composta de letras e números: `albini`, `iago99`, `k3y`.
 
-Neste exemplo, usarei a string `amar`.
+Neste exemplo, usarei a string `arara13`.
 
-Guardamos o tamanho da chave(quantidade de carácteres) % 36, pois ele será nosso iterador
+Removemos as letras repetidas da chave:
+
+|   Chave   |  Nova chave sem letras repetidas |    
+|-----------|----------------------------------|
+|  arara13  |               ar13               |
+
+Salvamos o tamanho da nossa nova chave % 36, que é o tamanho da lista circular:
 
 ```
-iterador = tamanho_da_palavra % 36
+iterador = tamanho_nova_chave % 36
 iterador = 4 % 36
 iterador = 4
 ```
 
-\* 36 é o tamanho da lista.
+As letras que aparecem na chave serão removidas da nossa lista circular e acrescentadas ao início de um buffer.
 
-E removemos as letras repetidas da chave:
+**A** bcdefghijklmnopq **R** stuvwxyz0 **1** 2 **3** 456789
 
-| Chave |  Chave sem letras repetidas |    
-|-------|-----------------------------|
-|  amar |             amr             |
-
-Removemos essas letras da chave da nossa lista circular e colocamos no início de um buffer.
-
-**a** bcdefghijkl **m** nopq **r** stuvwxyz0123456789
-
-|               lista                  |   lista sem as letras da chave    | buffer |    
-|--------------------------------------|-----------------------------------|--------|
-| abcdefghijklmnopqrstuvwxyz0123456789 | bcdefghijklnopqstuvwxyz0123456789 |   amr  |
+|               lista                  |   lista sem as letras da chave   | buffer |    
+|--------------------------------------|----------------------------------|--------|
+| abcdefghijklmnopqrstuvwxyz0123456789 | bcdefghijklmnopqstuvwxyz02456789 |  ar13  |
 
 
 Agora, baseado no iterador, passamos por nossa lista removendo as letras e acrescentando ao fim do buffer.
@@ -69,44 +67,38 @@ Neste caso, a cada 4 interações removemos uma letra da lista. Até acabar noss
 
 #### primeira interação
 
-**B**cdefghijklnopqstuvwxyz0123456789 | cont = 1
+**B** cdefghijklmnopqstuvwxyz02456789 | cont = 1
 
-b**C**defghijklnopqstuvwxyz0123456789 | cont = 2
+b **C** defghijklmnopqstuvwxyz02456789 | cont = 2
 
-bc**D**efghijklnopqstuvwxyz0123456789 | cont = 3
+bc **D** defghijklmnopqstuvwxyz02456789 | cont = 3
 
-bcd**E**fghijklnopqstuvwxyz0123456789 | **cont = 4**
+bcd **E** fghijklmnopqstuvwxyz02456789 | **cont = 4**
 
-Neste momento, a letra 'e' sai da lista circular e vai para o fim do buffer
+Neste momento, a letra 'E' sai da lista circular e vai para o fim do buffer.
 
-|              lista               | buffer |
-|----------------------------------|--------|
-| bcdfghijklnopqstuvwxyz0123456789 |  amre  |
+#### segunda iteração
 
-#### segunda interação
+bcd **F** ghijklmnopqstuvwxyz02456789 | cont = 1
 
-bcd**F**ghijklnopqstuvwxyz0123456789 | cont = 1
+bcdf **G** hijklmnopqstuvwxyz02456789| cont = 2
 
-bcdf**G**hijklnopqstuvwxyz0123456789 | cont = 2
+bcdfg **H** ijklmnopqstuvwxyz02456789 | cont = 3
 
-bcdfg**H**ijklnopqstuvwxyz0123456789 | cont = 3
+bcdfgh **I** jklmnopqstuvwxyz02456789 | **cont = 4**
 
-bcdfgh**I**jklnopqstuvwxyz0123456789 | cont = 4
+Neste momento, a letra 'I' sai da lista circular e vai para o fim do buffer.
 
-Neste momento, a letra 'i' sai da lista circular e vai para o fim do buffer
-
-|              lista              | buffer |
-|---------------------------------|--------|
-| bcdfghjklnopqstuvwxyz0123456789 |  amrei |
+#### enésima iteração
 
 Este comportamento se repete até a lista acabar.
-Vale lembrar que a lista é circular, portanto não há exatamente um "fim" dela.
+Vale lembrar que a lista é circular, então quando chegar ao fim da lista ele apenas volta ao começo e continua.
 
 #### Buffer e a Hash Table
 
 Neste exemplo, o buffer final ficaria da seguinte forma:
 
-`amreinsw048djpv16cktz7gq2bo3hyl95fxu`
+`ar13eimqvz59fkpw28gnu4clx7jydth60bso`
 
 Agora, basta substituir cada letra pela adjacente, como na cifra de César.
 Para isso, criamos uma hash table em que cada letra será trocada pela adjacente.
@@ -114,19 +106,38 @@ No nosso exemplo:
 
 |   Esta letra   |  Vira esta |    
 |----------------|------------|
-|       a        |     m      |
-|       m        |     r      |
-|       r        |     e      |
+|       a        |     r      |
+|       r        |     1      |
+|       1        |     3      |
 |      ...       |    ...     |
-|       u        |     a      |
+|       o        |     a      |
 
 Texto claro de exemplo:
 
-Sir Arthur Conan Doyle nasceu em Edimburgo, na Escócia, em 1859.
-
-Wne Mezyae K3sms J3l9i smwkia ir Ijnroaeq3, sm Iwk3knm, ir 6DF5.
+O milho cultivado para a produção da pipoca é de uma variedade especial.
 
 #### Decifra
 
 A decifra é análoga. A partir da chave, percorremos a lista para criar o buffer, montamos a tabela
 hash com a letra anterior e substituímos cada letra pela letra anterior.
+
+ar13eimqvz59fkpw28gnu4clx7jydth60bso
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
