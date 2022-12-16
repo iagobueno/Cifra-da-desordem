@@ -112,9 +112,21 @@ No nosso exemplo:
 |      ...       |    ...     |
 |       o        |     a      |
 
-Texto claro de exemplo:
+#### Exemplo
 
-O milho cultivado para a produção da pipoca é de uma variedade especial.
+Suponha o arquivo `arara.txt` com o seguinte texto claro:
+```
+No Brasil, temos 13 especies de araras, em seis generos distintos.
+```
+
+```
+$0 arara13 arara.txt encrypt
+```
+
+output:
+```
+ua s1romx, hiqao 3e iowilmio ti r1r1ro, iq oimo niui1ao tmohmuhao.
+```
 
 #### Decifra
 

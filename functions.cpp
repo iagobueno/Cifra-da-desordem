@@ -37,7 +37,7 @@ int check_Arguments(int argc, char **argv){
 }
 
 // Remove as letras repetidas da chave
-string removeRepeatedChars(string str){
+string remove_Repeated_Chars(string str){
     
     map<char, int> repeated;
     string key;
@@ -66,12 +66,9 @@ string to_Lower(string str){
     return str;
 }
 
-string create_List(string key){
-
-    cout << "sdjfoiasdjf"; PL;
+string remove_Key(string key){
 
     string str = "abcdefghijklmnopqrstuvwxyz0123456789";
-    cout << key; PL;
 
     int i;
     for(i = 0 ; i < key.size(); i++){
@@ -80,6 +77,81 @@ string create_List(string key){
 
     }
 
-    cout << str; PL;
     return str;
+}
+
+string josephus(string alphabet, string buffer){
+
+    int k = buffer.size();
+    int n = alphabet.size();
+
+    list<char> l;
+
+    for (int i = 0; i < n; i++) {
+        l.push_back(alphabet[i]);
+    }
+
+    list<char>::iterator it = l.begin();
+
+    while (!l.empty()) {
+
+        for (int j = 0; j < k-1; j++) {
+            it++;
+            if (it == l.end()) {it = l.begin(); }
+        }
+
+        buffer.push_back(*it);
+
+        // cout << *it << "\n";
+        it = l.erase(it);
+
+        if (it == l.end()){
+            it = l.begin();
+        }
+    }
+
+    return buffer;
+}
+
+map<char, char> create_Hash(string buffer){
+
+    int i;
+    map<char,char> m;
+    for(i = 0 ; i < buffer.size() - 1; i++){
+        m[buffer[i]] = buffer[i+1];
+    }
+    m[buffer[i]] = buffer[0];
+
+    // map<char, char>::iterator it;
+
+    // for( it = m.begin(); it !=m.end(); ++it){
+    //     cout << it->first << " => " << it->second << '\n';
+    // }
+
+    // string str = "0123456789abcdefghijklmnopqrstuvwxyz";
+    // for( int j=1, i=0, k=0; j<=36; j++){
+    //     cout << "| " << str[i] << " | " << m[str[i]] << " |     ";
+        
+    //     i+=6;
+    //     if(j%6 == 0){
+    //         PL;
+    //         i = ++k;
+    //     }
+    // }
+
+    return m;
+}
+
+string encrypt(string text, map<char, char> m){
+
+    string e;
+    int i;
+    for(i = 0 ; i < text.size(); i++){
+        if ( (text[i] >= '0' && text[i] <= '9') || (text[i] >='a' && text[i] <= 'z') )
+            e.push_back(m[text[i]]);
+        else
+            e.push_back(text[i]);
+    }
+
+    return e;
 }

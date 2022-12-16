@@ -9,10 +9,16 @@ using namespace std;
 
 int check_Arguments(int argc, char **argv);
 
-string removeRepeatedChars(string str);
+string remove_Repeated_Chars(string str);
 
 string to_Lower(string str);
 
-string create_List(string key);
+string remove_Key(string key);
+
+string josephus(string alphabet, string buffer);
+
+map<char, char> create_Hash(string buffer);
+
+string encrypt(string text, map<char, char> m);
 
 #endif
