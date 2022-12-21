@@ -8,16 +8,12 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
-    cin.tie(0);
-    ios_base::sync_with_stdio(0);
-
     // checa se os argumentos estão corretos
     if(check_Arguments(argc, argv))
         return 1;
 
-    // pega a chave, remove os caracteres repetidos e guarda o iterador
-    string key(argv[1]);
-    key = remove_Repeated_Chars(key);
+    // remove os caracteres repetidos da chave
+    string key = remove_Repeated_Chars();
 
     // remove a chave do alfabeto e cria o buffer
     string alphabet = remove_Key(key);
@@ -30,26 +26,15 @@ int main(int argc, char **argv)
     map<char, char> m = create_Hash(buffer);
 
     // abre o arquivo, pega o texto e o trata
-    std::ifstream myfile ("./texto.txt");
+    string text = read_Input();
 
-    string text;
-    std::string myline;
-    if ( myfile.is_open() ) {
-
-        while ( myfile ) {
-            std::getline (myfile, myline);
-            text.append(myline);
-        }
-
-    }
-
-    cout << text; PL;
+    // transforma os caracteres em uppercase em lowercase
     text = to_Lower(text);
-    cout << "texto: " << text; PL;
 
-    // criptografa o texto
-    string e = encrypt(text, m);
-    cout << "encry: " << e; PL;
+    // substitui os caracteres de acordo com a tabela Hash criada.
+    string e = replace_Char(text, m);
+    
+    write_Output(e);
 
     return 0;
 }
