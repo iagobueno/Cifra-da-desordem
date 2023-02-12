@@ -240,13 +240,27 @@ string josephus(string alphabet, string buffer)
 
 string transposition(string text, int k)
 {
+    /* Se tiver char \n no fim da string, é removido */
+    if (text[text.size() - 1] == '\n')
+    {
+        text.pop_back();
+    }
+
+    /* Se o texto não for divisível pelo tamanho da chave, preenche com lixo */
     for (; (text.size() % k) != 0;)
     {
-        text.push_back('x');
+        text.push_back(k + '0');
     }
 
     int n = text.size();
     string buffer;
+
+    if (global_verbose)
+    {
+        PL;
+        cout << "text: " << text;
+        PL;
+    }
 
     /* a cada K intervalo, tira uma letra da lista e adiciona ao Buffer */
     if (global_command == encrypt)
@@ -271,6 +285,15 @@ string transposition(string text, int k)
         PL;
         cout << "buffer: " << buffer;
         PL;
+    }
+
+    if (global_command == decrypt)
+    {
+        n = buffer.size();
+        for (; buffer[n - 1] == (k + '0'); n--)
+        {
+            buffer.pop_back();
+        }
     }
 
     return buffer;
@@ -309,25 +332,14 @@ string read_Input()
 
     string text;
 
+    std::ifstream myfile(global_input);
     if (global_input)
     {
-        std::ifstream myfile(global_input);
 
-        std::string myline;
-        if (myfile.is_open())
-        {
+        std::stringstream buffer;
+        buffer << myfile.rdbuf();
 
-            while (myfile)
-            {
-                std::getline(myfile, myline);
-                text.append(myline);
-            }
-        }
-        else
-        {
-            cout << "Could not open input file.";
-            PL;
-        }
+        return (string)(buffer.str());
     }
     else
     {
@@ -335,9 +347,8 @@ string read_Input()
         PL;
         PL;
         getline(cin, text);
+        return text;
     }
-
-    return text;
 }
 
 void write_Output(string e)
